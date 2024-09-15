@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teen Road Safety Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #ffd700;
+        }
+        .quiz-container {
+            max-width: 600px;
+            margin: auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #ff5733;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2em;
+            background-color: #ffd700;
+            display: none;
+        }
+        .correct {
+            color: green;
+        }
+        .wrong {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <h1>Road Safety Quiz</h1>
+
+        <!-- Question 1 -->
+        <div class="question">
+            <p>1. What percentage of road deaths in the ACT have been without a seatbelt?</p>
+            <label><input type="radio" name="q1" value="a"> 5%</label><br>
+            <label><input type="radio" name="q1" value="b"> 15%</label><br>
+            <label><input type="radio" name="q1" value="c"> 40%</label><br>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="question">
+            <p>2. When can you drive over the speed limit?</p>
+            <label><input type="radio" name="q2" value="a"> When there are no cars around</label><br>
+            <label><input type="radio" name="q2" value="b"> When you are on the highway</label><br>
+            <label><input type="radio" name="q2" value="c"> Never</label><br>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="question">
+            <p>3. What age range are the most dangerous drivers?</p>
+            <label><input type="radio" name="q3" value="a"> Young Drivers</label><br>
+            <label><input type="radio" name="q3" value="b"> Middle Aged Drivers</label><br>
+            <label><input type="radio" name="q3" value="c"> Elderly Drivers</label><br>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="question">
+            <p>4. What speed should you drive as a learner when driving interstate?</p>
+            <label><input type="radio" name="q4" value="a"> The same as in the ACT</label><br>
+            <label><input type="radio" name="q4" value="b"> Whatever I want</label><br>
+            <label><input type="radio" name="q4" value="c"> The speed regulations of the area</label><br>
+        </div>
+
+        <!-- Question 5 -->
+        <div class="question">
+            <p>5. How should the P or L plates be displayed?</p>
+            <label><input type="radio" name="q5" value="a"> They don't need to be displayed</label><br>
+            <label><input type="radio" name="q5" value="b"> So that they are visible from the front and back of the vehicle</label><br>
+            <label><input type="radio" name="q5" value="c"> They should be held out of the window while driving</label><br>
+        </div>
+
+        <!-- Question 6 -->
+        <div class="question">
+            <p>6. What is the legal blood alcohol concentration for learners?</p>
+            <label><input type="radio" name="q6" value="a"> 0</label><br>
+            <label><input type="radio" name="q6" value="b"> 0.025</label><br>
+            <label><input type="radio" name="q6" value="c"> 0.05</label><br>
+        </div>
+
+        <!-- Question 7 -->
+        <div class="question">
+            <p>7. When can you use your phone while driving as a learner?</p>
+            <label><input type="radio" name="q7" value="a"> Whenever you want</label><br>
+            <label><input type="radio" name="q7" value="b"> Never, unless while being used as a hands-free GPS</label><br>
+            <label><input type="radio" name="q7" value="c"> While waiting at a stoplight</label><br>
+        </div>
+
+        <button id="submitBtn">Submit</button>
+
+        <div id="result" class="result"></div>
+        <a href="index.html"><button>Back</button></a>
+    </div>
+
+    <script type="text/javascript">
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            // Correct answers
+            let answers = {
+                q1: 'b',
+                q2: 'c',
+                q3: 'a',
+                q4: 'c',
+                q5: 'b',
+                q6: 'a',
+                q7: 'b'
+            };
+
+            // User's score
+            let score = 0;
+            let totalQuestions = 7;
+
+            // Loop through questions and check answers
+            for (let i = 1; i <= totalQuestions; i++) {
+                let radios = document.getElementsByName('q' + i);
+                for (let j = 0; j < radios.length; j++) {
+                    if (radios[j].checked) {
+                        if (radios[j].value === answers['q' + i]) {
+                            score++;
+                        }
+                        break;
+                    }
+                }
+            }
+
+            // Display result
+            let resultDiv = document.getElementById('result');
+            resultDiv.classList.remove('correct', 'wrong'); // Clear previous classes
+
+            if (score === totalQuestions) {
+                resultDiv.innerHTML = `Perfect! You got all ${score} out of ${totalQuestions} correct!`;
+                resultDiv.classList.add('correct');
+            } else {
+                resultDiv.innerHTML = `You got ${score} out of ${totalQuestions} correct. Keep practicing!`;
+                resultDiv.classList.add('wrong');
+            }
+            resultDiv.style.display = 'block'; // Ensure the result is visible
+        });
+    </script>
+</body>
+</html>
+
